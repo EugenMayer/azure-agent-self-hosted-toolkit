@@ -26,6 +26,11 @@ This is used to
  - starts the agent right after cleanup up (few seconds) to be available for the next job
  - Use the original microsoft tools, binaries and all the bits. Be agent-upgrade ready.
  
+This fixes issues like
+ - https://github.com/Microsoft/azure-pipelines-agent/issues/1895, https://github.com/microsoft/azure-pipelines-agent/issues/708 an https://github.com/microsoft/azure-pipelines-yaml/issues/453
+ - Security: A non-related following up job has access to data of a prior job (leak)
+ - Jobs artifact downloads getting multiplied due to left-overs of prior jobs (pollution)
+
 ## Setup
 
 Requirements
@@ -82,8 +87,7 @@ Uninstalls agent 0..14 from the Default pool
 
 #### 100s delay before starting a job
 
-Bug in the agent, see https://github.com/microsoft/azure-pipelines-agent/issues/4215
-Workaround by blocking the network request
+Bug in the agent, see https://github.com/microsoft/azure-pipelines-agent/issues/4215 workaround by blocking the network request
 
 ```bash
 sudo ip route add blackhole 169.254.169.254
