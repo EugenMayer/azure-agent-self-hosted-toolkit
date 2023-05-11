@@ -21,6 +21,6 @@ if [ -z "$AZP_TOKEN" ]; then
 fi
 
 echo "Setting up $AMOUNT agents starting with $START_FROM"
-for ((i = $START_FROM ; i < $AMOUNT ; i++)); do
+for ((i = $START_FROM ; i < ($AMOUNT+$START_FROM) ; i++)); do
   ./agent-setup.sh agent$i $AZP_TOKEN $POOL $RUN_ONCE_MODE $DOCKER_NETWORK_MTU $AGENT_VERSION
 done
