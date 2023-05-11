@@ -23,6 +23,6 @@ if [ -z "$POOL" ]; then
 fi
 
 echo "Uninstalling $AMOUNT agents starting with $START_FROM"
-for ((i = $START_FROM ; i < $AMOUNT ; i++)); do
+for ((i = $START_FROM ; i < ($AMOUNT+$START_FROM) ; i++)); do
   ./agent-uninstall.sh agent$i $AZP_TOKEN $POOL
 done
