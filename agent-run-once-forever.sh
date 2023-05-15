@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# users ./run.sh --once but ensures after each job, we cleanup the workdir and start the agent again
+# so it fact the agent runs 'forever'
+
 AGENT_USER=$1
 CLEAN_WORKDIR=${2:-1} # use 0 to disable workdir deletion
 AGENT_INSTALL_DIR=${3:-"/home/$AGENT_USER/agent"}
@@ -44,6 +47,6 @@ do
     echo "Cleaning workdir: $AGENT_WORK_DIR"
     rm -fr $AGENT_WORK_DIR
   fi
-  # just continue to restart the server again, exit code 0 means run --once was ending because a job finished
+  # just continue to restart the agent again, exit code 0 means '--once was ending because a job finished'
   # the exit code will be 0 no matter if the job was successful or not - this is what we want.
 done
