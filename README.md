@@ -27,7 +27,7 @@ This is used to
  - Use the original microsoft tools, binaries and all the bits. Be agent-upgrade ready.
  
 This fixes issues like
- - https://github.com/Microsoft/azure-pipelines-agent/issues/1895, https://github.com/microsoft/azure-pipelines-agent/issues/708, https://github.com/KontextWork/drupalwiki_php/pull/847 and https://github.com/microsoft/azure-pipelines-yaml/issues/453
+ - https://github.com/Microsoft/azure-pipelines-agent/issues/1895, https://github.com/microsoft/azure-pipelines-agent/issues/708, https://github.com/microsoft/azure-pipelines-agent/issues/1506 and https://github.com/microsoft/azure-pipelines-yaml/issues/453
  - Security: A non-related, following up job has access to data of a prior job (leak)
  - Jobs artifact downloads getting multiplied due to left-overs of prior jobs (pollution)
 
