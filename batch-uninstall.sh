@@ -5,7 +5,7 @@ set -e
 START_FROM=${1:-0}
 AMOUNT=$2
 AZP_TOKEN=$3
-POOL=${4:-kw}
+POOL=${4:-Default}
 
 if [ -z "$AMOUNT" ]; then
   echo "Please provide the number of agents to setup as the first param"
