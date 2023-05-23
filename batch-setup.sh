@@ -5,10 +5,10 @@ set -e
 START_FROM=${1:-0}
 AMOUNT=$2
 AZP_TOKEN=$3
-POOL=${4:-kw}
-RUN_ONCE_MODE=${5:- 1}
-DOCKER_NETWORK_MTU=${5:-1500}
-AGENT_VERSION=${6:-"3.218.0"}
+POOL=$4
+RUN_ONCE_MODE=$5
+DOCKER_NETWORK_MTU=$6
+AGENT_VERSION=$7
 
 if [ -z "$AMOUNT" ]; then
   echo "Please provide the number of agents to setup as the first param"

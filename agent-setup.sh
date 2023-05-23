@@ -4,10 +4,10 @@ set -e
 
 AGENT_USER=$1
 AZP_TOKEN=$2
-POOL=${3:-kw}
+POOL=${3:-Default}
 USE_RUNONCE=${4:-1}
 DOCKER_NETWORK_MTU=${5:-1500}
-AGENT_VERSION=${6:-"3.218.0"}
+AGENT_VERSION=${6:-"3.220.2"}
 
 if [ -z "$AGENT_USER" ]; then
   echo "Please provide the agent name the first parameter param"
