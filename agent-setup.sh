@@ -44,7 +44,7 @@ export AGENT_INSTALL_DIR=$AGENT_USER_HOME/agent
 
 echo "Downloading agent"
 mkdir -p $AGENT_INSTALL_DIR
-curl -o $AGENT_INSTALL_DIR/agent.tar.gz https://vstsagentpackage.azureedge.net/agent/$AGENT_VERSION/vsts-agent-linux-x64-$AGENT_VERSION.tar.gz
+curl -f -o $AGENT_INSTALL_DIR/agent.tar.gz https://vstsagentpackage.azureedge.net/agent/$AGENT_VERSION/vsts-agent-linux-x64-$AGENT_VERSION.tar.gz
 cd $AGENT_INSTALL_DIR
 tar -xf agent.tar.gz
 rm -f $AGENT_INSTALL_DIR/agent.tar.gz
