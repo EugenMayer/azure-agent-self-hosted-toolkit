@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# users ./run.sh --once but ensures after each job, we cleanup the workdir and start the agent again
+# uses ./run.sh --once but ensures after each job, we cleanup the workdir and start the agent again
 # so it fact the agent runs 'forever'
 
 AGENT_USER=$1
@@ -35,6 +35,7 @@ stop_agent() {
 
 trap "stop_agent" HUP SIGINT INT TERM SIGKILL
 
+# run forever (until we get a SIGKILL/TERM)
 while [ true ]
 do
   echo "Starting agent $(date)"
