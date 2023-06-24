@@ -4,15 +4,16 @@ Helps running azure (multiple) azure self-hosted agents on one machine (scoped).
 
 Features
 
-- One-line command to set up X agent (including user per agent, systemd service). Downloads, setups and keeps them running.
-- supports running docker based jobs. Set's up a user and home folder for each agent automatically.
+- One-line command to set up n-agents (including indivdual os users per agent, systemd service). Downloads, setups and keeps them running.
+- Set's up a user and home folder for each agent automatically.
+- Supports running docker based jobs.
 - Uses `--once` mode to run the agents with automatic `workdir` cleanup and `restart` after job-end
 - offers batch-uninstalling agents
 - Helps setting up MTU vars
 
 This is not
 - an orchestrator for k8s
-- this does not use docker-in-docker (though it can be used to run job in docker containers)
+- this does not use docker-in-docker (though it can be used to run jobs in docker containers)
 
 # Details
 
