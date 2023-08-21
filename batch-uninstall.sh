@@ -6,6 +6,7 @@ START_FROM=${1:-0}
 AMOUNT=$2
 AZP_TOKEN=$3
 POOL=${4:-Default}
+AZURE_PROJECT=$5
 
 if [ -z "$AMOUNT" ]; then
   echo "Please provide the number of agents to setup as the first param"
@@ -24,5 +25,5 @@ fi
 
 echo "Uninstalling $AMOUNT agents starting with $START_FROM"
 for ((i = $START_FROM ; i < ($AMOUNT+$START_FROM) ; i++)); do
-  ./agent-uninstall.sh agent$i $AZP_TOKEN $POOL
+  ./agent-uninstall.sh agent$i $AZP_TOKEN $POOL $AZURE_PROJECT
 done
