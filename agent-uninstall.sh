@@ -5,6 +5,7 @@ set -e
 AGENT_USER=$1
 PAT=$2
 POOL=$3
+AZURE_PROJECT=${4:-"kontextwork"}
 if [ -z "$AGENT_USER" ]; then
   echo "Please provide the agent name the first parameter param"
   exit 1
@@ -24,7 +25,7 @@ fi
 # Uninstall systemd service needs to run under root and from the agent folder
 cd /home/$AGENT_USER/agent
 echo "Stopping the agent $AGENT_USER"
-systemctl stop vsts.agent.kontextwork.$POOL.$AGENT_USER
+systemctl stop vsts.agent.$AZURE_PROJECT.$POOL.$AGENT_USER
 ./svc.sh uninstall
 # FIXME we could also run but we would need to provide the pat ..
 su -c "cd /home/$AGENT_USER/agent && ./config.sh remove --auth pat --token $PAT" $AGENT_USER

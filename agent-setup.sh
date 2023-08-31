@@ -8,6 +8,8 @@ POOL=${3:-Default}
 USE_RUNONCE=${4:-1}
 DOCKER_NETWORK_MTU=${5:-1500}
 AGENT_VERSION=${6:-"3.220.2"}
+ARCH=${7:-"x64"}
+AZURE_PROJECT=${8:-"kontextwork"}
 
 if [ -z "$AGENT_USER" ]; then
   echo "Please provide the agent name the first parameter param"
@@ -44,7 +46,7 @@ export AGENT_INSTALL_DIR=$AGENT_USER_HOME/agent
 
 echo "Downloading agent"
 mkdir -p $AGENT_INSTALL_DIR
-curl -f -o $AGENT_INSTALL_DIR/agent.tar.gz https://vstsagentpackage.azureedge.net/agent/$AGENT_VERSION/vsts-agent-linux-x64-$AGENT_VERSION.tar.gz
+curl -f -o $AGENT_INSTALL_DIR/agent.tar.gz https://vstsagentpackage.azureedge.net/agent/$AGENT_VERSION/vsts-agent-linux-$ARCH-$AGENT_VERSION.tar.gz
 cd $AGENT_INSTALL_DIR
 tar -xf agent.tar.gz
 rm -f $AGENT_INSTALL_DIR/agent.tar.gz
@@ -53,7 +55,7 @@ chown $AGENT_USER:$AGENT_USER $AGENT_USER_HOME -R
 echo "configuring agent"
 # use ./config.sh --help to find more options
 # --replace to replace an agent with the same name (if we redeploy)
-su -c "cd $AGENT_INSTALL_DIR && ./config.sh --replace --unattended --acceptTeeEula --url https://dev.azure.com/kontextwork --auth pat --token $AZP_TOKEN --pool $POOL --agent $AGENT_USER" $AGENT_USER
+su -c "cd $AGENT_INSTALL_DIR && ./config.sh --replace --unattended --acceptTeeEula --url https://dev.azure.com/$AZURE_PROJECT --auth pat --token $AZP_TOKEN --pool $POOL --agent $AGENT_USER" $AGENT_USER
 
 echo "Adding ENV variables for different aspects / fixes"
 # fix docker MTU or the networks created for the docker container will have the wrong (1500) MTA and thus
@@ -68,7 +70,7 @@ cd $AGENT_USER_HOME/agent/
 if [ $USE_RUNONCE -gt 0 ]; then
   echo "Manipulating system-unit file to use agent-run-once-forever.sh"
   # this is the path patter we borrowed from svc.sh
-  SVC_NAME=`systemd-escape --path "vsts.agent.kontextwork.$POOL.$AGENT_USER.service"`
+  SVC_NAME=`systemd-escape --path "vsts.agent.$AZURE_PROJECT.$POOL.$AGENT_USER.service"`
   UNIT_FILE_PATH=/etc/systemd/system/${SVC_NAME}
 
   ESCAPED_RUN_ONCE_PATH='\/opt\/azure-agent-setup\/agent-run-once-forever\.sh'
@@ -81,5 +83,5 @@ if [ $USE_RUNONCE -gt 0 ]; then
 fi
 
 echo "Enabling and starting agent"
-systemctl enable vsts.agent.kontextwork.$POOL.$AGENT_USER
-systemctl start vsts.agent.kontextwork.$POOL.$AGENT_USER
+systemctl enable vsts.agent.$AZURE_PROJECT.$POOL.$AGENT_USER
+systemctl start vsts.agent.$AZURE_PROJECT.$POOL.$AGENT_USER
