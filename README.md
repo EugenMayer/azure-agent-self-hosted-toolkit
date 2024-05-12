@@ -1,10 +1,10 @@
 # WAT
 
-Helps running azure (multiple) azure self-hosted agents on one machine (scoped).
+Helps running azure-pipeline self-hosted agents.
 
 Features
 
-- One-line command to set up n-agents (including indivdual os users per agent, systemd service). Downloads, setups and keeps them running.
+- One-line command to set up 1..n-agents (including indivdual os users per agent if >1, systemd service). Downloads, setups and keeps them running.
 - Set's up a user and home folder for each agent automatically.
 - Supports running docker based jobs.
 - Uses `--once` mode to run the agents with automatic `workdir` cleanup and `restart` after job-end
@@ -19,7 +19,7 @@ This is not
 
 ### run-once mode
 
-The run-once mode is based on Microsoft's `./run.sh --once` which ensures that an agents only runs 1 job and then stops.
+The run-once mode is based on Microsoft's `./run.sh --once` which ensures that an agent only runs 1 job and then stops.
 This is used to
 
  - cleanup the workdir in a safe manner after each job (ensuring no other job is scheduled yet)
